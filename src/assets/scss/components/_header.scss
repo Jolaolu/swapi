@@ -1,0 +1,54 @@
+.header{
+    width: 100%;
+    height: 100vh;
+    background: url('~@/assets/images/hero-banner.jpg');
+    background-size: cover;
+    padding: 8rem 5rem 0 5rem;
+
+    .header-hero__main-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+         .underline{
+            width: 31rem;
+            background: $background-color;
+            height: .3rem;
+            margin-bottom: 3rem;
+        }
+    }
+    .header-hero__container{
+        margin-top: 7rem;
+        color: $primary-color;
+       
+    }
+    .header-hero__main{
+        display: flex;
+        justify-content: center;
+    
+    }
+    .header-hero__title{
+        color: $white;
+        font-weight: 900;
+        font-size: $base-heading;
+        margin:.3rem 0 0 2rem;
+ 
+    }
+    .header-hero__detail{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .header-hero__text{
+        font-size: 2rem;
+        width: 50rem;
+        font-weight: 300;
+        color: $primary-color;
+    }
+
+}
+
+.header-logo{
+    width: 10%;
+    height: 9%;
+}

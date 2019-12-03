@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 
-Vue.use(VueRouter);
+Vue.use( VueRouter );
 
-const PeopleView = () => import("@/views/CharactersView");
+const Home = () => import( "@/views/Home.vue" );
+const PeopleView = () => import("@/views/PeopleView");
 const StarshipsView = () => import("@/views/StarshipsView");
 const PlanetsView = () => import("@/views/PlanetsView");
 const Person = () => import("@/views/Person");
