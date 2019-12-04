@@ -4,6 +4,7 @@
       <div class="planetcard-image__wrapper">
         <img :src="selectedImage" alt="" srcset="" />
       </div>
+      <div class="planetcard-title"> Corellia</div>
     </router-link>
   </article>
 </template>

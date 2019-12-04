@@ -1,3 +1,31 @@
 .planetcard{
     width: 30%;
+    margin: 2rem 0;
+    .planetcard-image__wrapper{
+        width: 100%;
+    }
+    .planetcard-title{
+        color: $white;
+        margin-top: -5rem;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.8rem;
+        letter-spacing: .1rem;
+    }
+
+}
+.circlenav-container{
+    display: flex;
+    align-items: center;
+}
+.circlenav{
+    height: 2rem;
+    width: 2rem;
+    background-color: $white;
+    border: .2rem solid $tertiary-color;
+    border-radius: 100%;
+    margin: 1rem;
+    &:hover{
+          background-color: $tertiary-color;
+    }
 }

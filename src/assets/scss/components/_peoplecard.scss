@@ -1,0 +1,28 @@
+.peoplecard{
+    width: 45%;
+    height: 389px;
+    padding-bottom: .8rem;
+    margin: 2rem 0;
+    .peoplecard-container{
+        display: grid;
+        grid-template-columns: 58% 42% ;
+    }
+    .peoplecard-image__wrapper{
+        width: 100%;
+        
+ 
+    }
+    .person-image{
+        width: 369px;
+        height: 100%;
+
+    }
+    .peoplecard-details{
+        background-color:  $primary-color;
+        padding: 2rem;
+    }
+    .peoplecard-info{
+        display: flex;
+        flex-direction: column;
+    }
+}       

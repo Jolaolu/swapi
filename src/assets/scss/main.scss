@@ -9,10 +9,11 @@
 //components 
 @import 'components/_header';
 @import 'components/_search';
-// @import 'components/peoplecard';
+@import 'components/peoplecard';
 @import 'components/buttons';
 @import 'components/_starshipscard';
-// @import 'components/planetscard';
+@import 'components/planetscard';
+@import "components/_footer";
 
 //pages
 @import 'pages/home';

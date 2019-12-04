@@ -7,7 +7,7 @@
       <div class="starshipcard-info">
         <h3 class="starshipcard-title">Ghost</h3>
         <span class="year"> Birth Year: 19BBY</span>
-        <span class="year"> Gender: Male</span>
+        <span class="gender"> Gender: Male</span>
         <div class="button-wrapper">
           <router-link to=""> <ReadMore /> </router-link>
         </div>
