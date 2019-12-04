@@ -10,11 +10,12 @@
 @import 'components/_header';
 @import 'components/_search';
 // @import 'components/peoplecard';
-// @import 'components/button';
-// @import 'components/detailcard';
+@import 'components/buttons';
+@import 'components/_starshipscard';
+// @import 'components/planetscard';
 
 //pages
-// @import 'pages/home';
+@import 'pages/home';
 // @import 'pages/characterdetail';
 // @import 'pages/details'
 

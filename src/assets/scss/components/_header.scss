@@ -3,17 +3,17 @@
     height: 100vh;
     background: url('~@/assets/images/hero-banner.jpg');
     background-size: cover;
-    padding: 8rem 5rem 0 5rem;
+    padding: 8rem 0 0 5rem;
 
     .header-hero__main-wrapper{
         display: flex;
         flex-direction: column;
         align-items: center;
          .underline{
-            width: 31rem;
+            width: 35rem;
             background: $background-color;
             height: .3rem;
-            margin-bottom: 3rem;
+            margin: 1rem  0 3rem 0;
         }
     }
     .header-hero__container{
@@ -47,7 +47,10 @@
     }
 
 }
-
+.main-logo{
+    width: 15%;
+    height: 5%;
+}
 .header-logo{
     width: 10%;
     height: 9%;

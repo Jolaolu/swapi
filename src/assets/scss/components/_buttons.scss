@@ -1,0 +1,29 @@
+.readmore{
+    padding: 1rem 3.5rem;
+    font-size: 1.2rem;
+    background-color: $secondary-color;
+    border: 0;
+    text-transform: capitalize;
+    color: $tertiary-color;
+    outline: none;
+    .icon{
+       margin-top: .2rem;
+       margin-left: .3rem;
+    }
+    &:hover{
+        background-color:$black;
+        color: $white;
+    }
+}
+
+.viewmore{
+    text-align: center;
+  border: .2rem solid $black;  
+  border-radius: .4rem;
+  background: $white;
+  text-transform: uppercase;
+  color: $tertiary-color;
+  font-size: 1.2rem ;
+  padding: 1.2rem 15rem;
+  
+}

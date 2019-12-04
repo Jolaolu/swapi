@@ -1,0 +1,33 @@
+.starshipcard{
+    width: 27.5%;
+    padding-bottom: .8rem;
+    margin: 2rem 5rem;
+    background-color: $secondary-color;
+    .starshipcard-image__wrapper{
+        width: 100%;
+         margin: 0;
+         height: 100%;
+    }
+    .starship-image{
+        margin: 0;
+        width: 100%;
+    }
+    .starshipcard-info__wrapper{
+        padding-left: .8rem;
+    }
+
+    .starshipcard-info{
+        background-color: $primary-color;
+        padding: 2rem 2rem 1.8rem 2rem;
+        margin-right:  -0.8rem ;
+        // margin-bottom: 2rem;
+        margin-top: -0.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .button-wrapper{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 2rem;
+    }
+}

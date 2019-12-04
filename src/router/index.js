@@ -1,9 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-Vue.use( VueRouter );
+Vue.use(VueRouter);
 
-const Home = () => import( "@/views/Home.vue" );
+const Home = () => import("@/views/Home.vue");
 const PeopleView = () => import("@/views/PeopleView");
 const StarshipsView = () => import("@/views/StarshipsView");
 const PlanetsView = () => import("@/views/PlanetsView");
