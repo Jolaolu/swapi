@@ -1,21 +1,19 @@
 <template>
-    <article class="peoplecard">
-        <div class="peoplecard-container">
-            <div class="peoplecard-image__wrapper">
-                <img :src="selectedImage" alt="" srcset="" class="person-image">
-            </div>
-            <div class="peoplecard-details"> 
-                 <div class="peoplecard-info">
-                    <h3 class="peoplecard-title">Luke Skywalker</h3>
-                    <span class="year"> Birth Year: 19BBY</span>
-                    <span class="Gender"> Gender: Male</span>
-                    <div class="button-wrapper">
-                        <router-link to=""> <ReadMore /> </router-link>
-                    </div>
-                </div>
-            </div>
+  <article class="peoplecard-container__wrapper">
+    <div class="peoplecard-container">
+      <div class="peoplecard-image__wrapper">
+        <img :src="getRandomImage()" alt srcset class="person-image" />
+      </div>
+      <div class="peoplecard-details">
+        <div class="peoplecard-info">
+          <h3 class="peoplecard-title">{{ character.name }}</h3>
+          <span class="year"> <strong> Birth Year: </strong>  {{character.birth_year}}</span>
+          <span class="Gender"><strong> Gender: </strong> {{character.gender}}</span>
+          <div class="button-wrapper"></div>
         </div>
-    </article>
+      </div>
+    </div>
+  </article>
 </template>
 <script>
 import { getRandomNumber } from "@/utils/helpers";
@@ -30,15 +28,14 @@ export default {
       selectedImage: null
     };
   },
+  props: ["character"],
   components: {},
   methods: {
     getRandomImage() {
       const number = getRandomNumber(this.images.length);
-      this.selectedImage = this.images[number];
+      return (this.selectedImage = this.images[number]);
     }
   },
-  created() {
-    this.getRandomImage();
-  }
+  created() {}
 };
 </script>

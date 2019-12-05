@@ -1,28 +1,38 @@
-.peoplecard{
-    width: 45%;
-    height: 389px;
-    padding-bottom: .8rem;
-    margin: 2rem 0;
-    .peoplecard-container{
+
+
+    .peoplecard-container__wrapper{
+        width: 95%;
+        margin: 2rem;
+    
+    }
+      .peoplecard-container{
+        width: 100%; 
         display: grid;
         grid-template-columns: 58% 42% ;
-    }
+      }
     .peoplecard-image__wrapper{
-        width: 100%;
-        
- 
+        // width: 100%; 
     }
     .person-image{
-        width: 369px;
-        height: 100%;
-
+        width: 100%;
+        height: 389px;
     }
     .peoplecard-details{
         background-color:  $primary-color;
         padding: 2rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
     }
     .peoplecard-info{
         display: flex;
+        justify-content: center;
         flex-direction: column;
+        span{
+            text-transform: capitalize;
+         }
     }
-}       
+    
+
+
+     

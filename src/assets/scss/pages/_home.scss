@@ -24,4 +24,33 @@
         justify-content: center;
          margin-bottom:8rem;
     }
+    .popular-characters{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 50% 50%;
+       align-content: space-around;
+       margin-bottom: 8rem;
+    }
+    .popular-planets{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        align-content: space-between;
+         justify-content: center;
+         margin-bottom: 8rem;
+        .planet-card{
+            margin: 2rem
+        }
+    }
+    .popular-starships{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        align-content: space-between;
+         justify-content: center;
+         margin-bottom: 8rem;
+        .starship-card{
+            margin: 2rem
+        }
+    }
 }

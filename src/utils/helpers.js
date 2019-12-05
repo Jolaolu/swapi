@@ -11,9 +11,9 @@
  *
  * @param {String} payload   The data to splice
  */
-export function spliceData(payload) {
+export function spliceData(payload, number) {
   let handler = payload;
-  return handler.splice(6);
+  return handler.splice(number);
 }
 
 /**

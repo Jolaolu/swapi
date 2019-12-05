@@ -2,9 +2,9 @@
   <article class="planetcard">
     <router-link to="">
       <div class="planetcard-image__wrapper">
-        <img :src="selectedImage" alt="" srcset="" />
+        <img :src="getRandomImage()" alt="" srcset="" />
       </div>
-      <div class="planetcard-title"> Corellia</div>
+      <div class="planetcard-title">{{ planet.name }}</div>
     </router-link>
   </article>
 </template>
@@ -21,14 +21,14 @@ export default {
     };
   },
   components: {},
+  props: ["planet"],
   methods: {
     getRandomImage() {
       const number = getRandomNumber(this.images.length);
-      this.selectedImage = this.images[number];
+      return this.selectedImage = this.images[number];
     }
   },
   created() {
-    this.getRandomImage();
   }
 };
 </script>
