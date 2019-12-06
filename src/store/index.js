@@ -92,15 +92,11 @@ export default new Vuex.Store({
           return data;
         })
         .then(data => {
-      
-
           const [people, starships, planets] = data;
 
           const popularPeople = people;
           const popularStarships = starships;
           const popularPlanets = planets;
-
-        
 
           // strip out unwanted data and reduce response to first 6 objects
 
@@ -142,7 +138,6 @@ export default new Vuex.Store({
             return data;
           })
           .then(response => {
-      
             const [people, starships, planets] = response;
             const popularPeople = people;
             const popularStarships = starships;
@@ -190,10 +185,7 @@ export default new Vuex.Store({
           return reconstructObject(data);
         })
         .then(response => {
-          console.log(response);
-
           const capitalized = capitalizeItem(item);
-          console.log(capitalized);
 
           commit(`set${capitalized}`, response);
 

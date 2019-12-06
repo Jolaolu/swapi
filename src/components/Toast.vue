@@ -14,7 +14,6 @@ export default {
 .toast {
   display: flex;
   justify-content: center;
-  /* position: fixed; */
   width: 50%;
   padding: 1.5em;
   border-radius: 5px;

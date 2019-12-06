@@ -19,7 +19,9 @@
                 name: 'Person',
                 params: { id: person.id, person: person }
               }"
-            ></router-link>
+            >
+              <ReadMore
+            /></router-link>
           </div>
         </div>
       </div>
@@ -40,7 +42,9 @@ export default {
     };
   },
   props: ["person"],
-  components: {},
+  components: {
+    ReadMore: () => import("@/components/ReadMore")
+  },
   methods: {
     getRandomImage() {
       const number = getRandomNumber(this.images.length);

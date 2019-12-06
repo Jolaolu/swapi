@@ -11,18 +11,20 @@
         <img class="starship-picture" :src="getRandomImage()" alt />
       </div>
       <div class="starship-information__wrapper">
-        <h2 class="starship-name">{{starship.name}}</h2>
+        <h2 class="starship-name">{{ starship.name }}</h2>
         <div class="starship-information">
-          <div> <strong>Model:</strong>{{starship.model}}</div>
-          <div><strong>Length:</strong>{{starship.length}}</div>
-          <div><strong>Crew:</strong>{{starship.crew}}</div>
-          <div><strong>Hyperdrive Rating:</strong>{{starship.hyperdrive_rating}}</div>
-          <div><strong>Capacity:</strong>{{starship.cargo_capacity}}</div>
-          <div><strong>Passengers:</strong>{{starship.passengers}}</div>
-          <div><strong>Class:</strong>{{starship.starship_class}}</div>
-          <div><strong>Manufacturers:</strong>{{starship.manufacturer}}</div>
-          <div><strong>MGLT:</strong>{{starship.MGLT}}</div>
-          <div><strong>Consumables:</strong>{{starship.consumables}}</div>
+          <div><strong>Model:</strong>{{ starship.model }}</div>
+          <div><strong>Length:</strong>{{ starship.length }}</div>
+          <div><strong>Crew:</strong>{{ starship.crew }}</div>
+          <div>
+            <strong>Hyperdrive Rating:</strong>{{ starship.hyperdrive_rating }}
+          </div>
+          <div><strong>Capacity:</strong>{{ starship.cargo_capacity }}</div>
+          <div><strong>Passengers:</strong>{{ starship.passengers }}</div>
+          <div><strong>Class:</strong>{{ starship.starship_class }}</div>
+          <div><strong>Manufacturers:</strong>{{ starship.manufacturer }}</div>
+          <div><strong>MGLT:</strong>{{ starship.MGLT }}</div>
+          <div><strong>Consumables:</strong>{{ starship.consumables }}</div>
         </div>
       </div>
     </div>

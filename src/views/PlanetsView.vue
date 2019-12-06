@@ -11,7 +11,7 @@
       </div>
       <section class="planets-list">
         <div class="home-content__title-wrapper">
-          <h3 class="home-content__title"> Planets</h3>
+          <h3 class="home-content__title">Planets</h3>
           <div class="title-underline"></div>
         </div>
         <div class="isLoading" v-if="isLoading">

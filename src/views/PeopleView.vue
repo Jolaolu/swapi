@@ -11,7 +11,7 @@
       </div>
       <section class="people-list">
         <div class="home-content__title-wrapper">
-          <h3 class="home-content__title"> Characters </h3>
+          <h3 class="home-content__title">Characters</h3>
           <div class="title-underline"></div>
         </div>
         <div class="isLoading" v-if="isLoading">
