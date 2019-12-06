@@ -142,9 +142,9 @@ export default new Vuex.Store({
             } else {
               const data = [];
               data.push(
-                reconstructObject( popularPeople ),
-                reconstructObject( popularStarships ),
-                reconstructObject(popularPlanets),
+                reconstructObject(popularPeople),
+                reconstructObject(popularStarships),
+                reconstructObject(popularPlanets)
               );
               return data;
             }
@@ -154,7 +154,6 @@ export default new Vuex.Store({
             const popularPeople = people;
             const popularStarships = starships;
             const popularPlanets = planets;
-            console.log(response);
 
             dispatch("showToast", {
               message: "Results found",
