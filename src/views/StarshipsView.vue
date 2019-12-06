@@ -27,6 +27,7 @@
           </div>
         </div>
       </section>
+      <Pagination @changing="changePage" />
     </main>
     <Footer />
   </div>
@@ -51,23 +52,26 @@ export default {
     StarshipCard: () => import("@/components/StarshipCard.vue"),
     Loader: () => import("@/components/Loader.vue"),
     Toast: () => import("@/components/Toast.vue"),
-    Footer: () => import("@/components/Footer.vue")
+    Footer: () => import("@/components/Footer.vue"),
+    Pagination: () => import("@/components/Pagination")
   },
   methods: {
     ...mapActions(["fetchList"]),
 
     makeSearchRequest: function() {
-      this.$router.push({
-        name: "search",
-        query: { q: this.searchItem }
-      });
       const searchQuery = this.searchItem;
-      this.$store.dispatch("searchPopularData", searchQuery);
+      this.$store.dispatch("searchList", {
+        searchItem: searchQuery,
+        item: "starships"
+      });
     },
 
     getSearchTerm: function(searchValue) {
       this.searchItem = searchValue;
       this.makeSearchRequest();
+    },
+    changePage(value) {
+      this.$store.dispatch("changePage", { value: value, item: "starships" });
     }
   },
   mounted() {

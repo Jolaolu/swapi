@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+// import createPersistedState from "vuex-persistedstate";
 import { spliceData, capitalizeItem, reconstructObject } from "@/utils/helpers";
 import http from "@/utils/service";
 
@@ -21,9 +21,9 @@ export default new Vuex.Store({
     pageDetails: {
       to: null,
       from: 1,
-      perPage: 20,
-      totalPages: null,
-      viewedPages: null
+      perPage: 10,
+      totalData: null,
+      totalPages: null
     }
   },
   mutations: {
@@ -42,8 +42,9 @@ export default new Vuex.Store({
     Toast(state, payload) {
       state.toast = { ...payload };
     },
-    pageData(state, payload) {
-      state.pageData = { ...payload };
+    setFromTo ( state, {from,to }) {
+      state.pageDetails.from += from;
+      state.pageDetails.to += to;
     },
     currentPage(state, payload) {
       state.currentPage += payload;
@@ -51,8 +52,8 @@ export default new Vuex.Store({
     setTotalData(state, payload) {
       state.pageDetails.totalData = payload;
     },
-    setTotalPages(state, payload) {
-      state.pageDetails.totalPages = payload;
+    setTotalPages(state, { perPage, totalItems }) {
+      state.pageDetails.totalPages = Math.ceil( totalItems / perPage);
     }
   },
   getters: {
@@ -177,12 +178,24 @@ export default new Vuex.Store({
         dispatch("showToast", { message: message, context: "error" });
       }
     },
-    fetchList({ commit, dispatch }, item) {
+    fetchList({ commit, dispatch, state }, item) {
       commit("Loading", true);
       http
-        .get(`${item}`)
+        .get(`${item}/?page=${state.currentPage}`)
         .then(response => {
           const data = response.data.results;
+          console.log(response);
+        
+          commit( "setTotalData", response.data.count );
+
+          commit( "setTotalPages", {
+            perPage: state.pageDetails.perPage,
+            totalItems: state.pageDetails.totalData
+          } );
+          if ( state.currentPage === 1 ) {
+            commit( "setFromTo", { from: state.pageDetails.from -1, to: state.pageDetails.perPage } )
+          }
+         
           return reconstructObject(data);
         })
         .then(response => {
@@ -196,11 +209,76 @@ export default new Vuex.Store({
           const message = response;
           dispatch("showToast", { message: message, context: "error" });
         });
+    },
+    searchList({ commit, dispatch }, { searchItem, item }) {
+      commit("Loading", true);
+      http
+        .get(`${item}/?search=${searchItem}`)
+        .then(response => {
+          if (response.data.count === 0) {
+            dispatch("showToast", {
+              message: "Results not found",
+              context: "error"
+            });
+          } else {
+            const data = response.data.results;
+            return reconstructObject(data);
+          }
+        })
+        .then(response => {
+          const capitalized = capitalizeItem(item);
+
+          commit(`set${capitalized}`, response);
+
+          commit("Loading", false);
+        })
+        .catch(response => {
+          const message = response;
+          dispatch("showToast", { message: message, context: "error" });
+        });
+    },
+    changePage({ commit, dispatch, state }, { value, item }) {
+      switch (value) {
+        case "next":
+          commit( "currentPage", 1 );
+          commit( "setFromTo", { from: state.pageDetails.from + 10 - 1, to: state.pageDetails.to + 10  } )
+
+          dispatch("fetchList", item);
+          if (state.currentPage > state.pageDetails.totalPages) {
+            commit("currentPage", -1);
+
+            dispatch("showToast", {
+              message: "End Of Info",
+              context: "error"
+            });
+          }
+          break;
+        case "previous":
+          commit( "currentPage", -1 );
+          commit( "setFromTo", { from: state.pageDetails.from - 10 + 1, to: state.pageDetails.to - 10 } )
+
+          dispatch("fetchList", item);
+
+          console.log(state.currentPage);
+
+          if (state.currentPage < 1) {
+            commit("currentPage", 1);
+
+            dispatch("showToast", {
+              message: "Beginning Of Info",
+              context: "error"
+            });
+          }
+          break;
+        default:
+          commit("currentPage", 0);
+          break;
+      }
     }
   },
-  plugins: [
-    createPersistedState({
-      storage: window.sessionStorage
-    })
-  ]
+  // plugins: [
+  //   createPersistedState({
+  //     storage: window.sessionStorage
+  //   })
+  // ]
 });

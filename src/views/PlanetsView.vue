@@ -27,6 +27,11 @@
           </div>
         </div>
       </section>
+      <div class="pagination-wrapper"> 
+        <div class="pagination-info">{{pageDetails.from}} - {{pageDetails.to}} of {{pageDetails.totalData}} </div>
+          <Pagination @changing="changePage" />
+      </div>
+    
     </main>
     <Footer />
   </div>
@@ -51,29 +56,32 @@ export default {
     PlanetCard: () => import("@/components/PlanetCard.vue"),
     Loader: () => import("@/components/Loader.vue"),
     Toast: () => import("@/components/Toast.vue"),
-    Footer: () => import("@/components/Footer.vue")
+    Footer: () => import("@/components/Footer.vue"),
+    Pagination: () => import("@/components/Pagination")
   },
   methods: {
     ...mapActions(["fetchList"]),
 
     makeSearchRequest: function() {
-      this.$router.push({
-        name: "search",
-        query: { q: this.searchItem }
-      });
       const searchQuery = this.searchItem;
-      this.$store.dispatch("searchPopularData", searchQuery);
+      this.$store.dispatch("searchList", {
+        searchItem: searchQuery,
+        item: "planets"
+      });
     },
 
     getSearchTerm: function(searchValue) {
       this.searchItem = searchValue;
       this.makeSearchRequest();
+    },
+    changePage(value) {
+      this.$store.dispatch("changePage", { value: value, item: "planets" });
     }
   },
   mounted() {
     this.fetchList("planets");
   },
-  computed: mapGetters(["planets", "isLoading", "toast"])
+  computed: mapGetters(["planets", "isLoading", "toast", "pageDetails"])
 };
 </script>
 <style lang=""></style>

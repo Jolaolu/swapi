@@ -7,11 +7,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faSearch,
   faArrowRight,
-  faCaretLeft
+  faCaretLeft,
+  faAngleLeft,
+  faAngleRight
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faSearch, faArrowRight, faCaretLeft);
+library.add(faSearch, faArrowRight, faCaretLeft, faAngleLeft, faAngleRight);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
