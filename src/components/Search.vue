@@ -15,7 +15,7 @@
           name="search"
           id=""
           placeholder="Enter a search term"
-          @keyup="search"
+          @keyup.enter="search"
           v-model="searchItem"
         />
       </div>
@@ -31,7 +31,7 @@ export default {
     };
   },
   methods: {
-    search: function(e) {
+    search: async function(e) {
       e.preventDefault();
       this.$emit("searching", this.searchItem);
     }

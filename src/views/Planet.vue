@@ -8,7 +8,7 @@
     </router-link>
     <div class="planet-container">
       <div class="planet-name__container">
-        <h2 class="planet-name"> {{ planet.name }}</h2>
+        <h2 class="planet-name">{{ planet.name }}</h2>
       </div>
       <div class="planet-information__container">
         <div class="planet-information">

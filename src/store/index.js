@@ -129,19 +129,6 @@ export default new Vuex.Store({
             const popularPeople = people.data.results;
             const popularStarships = starships.data.results;
             const popularPlanets = planets.data.results;
-            const data = [];
-            data.push(
-              reconstructObject(popularPlanets),
-              reconstructObject(popularPeople),
-              reconstructObject(popularStarships)
-            );
-            return data;
-          })
-          .then(response => {
-            const [people, starships, planets] = response;
-            const popularPeople = people;
-            const popularStarships = starships;
-            const popularPlanets = planets;
 
             if (
               people.data.count === 0 &&
@@ -153,11 +140,26 @@ export default new Vuex.Store({
                 context: "error"
               });
             } else {
-              dispatch("showToast", {
-                message: "Results found",
-                context: "success"
-              });
+              const data = [];
+              data.push(
+                reconstructObject( popularPeople ),
+                reconstructObject( popularStarships ),
+                reconstructObject(popularPlanets),
+              );
+              return data;
             }
+          })
+          .then(response => {
+            const [people, starships, planets] = response;
+            const popularPeople = people;
+            const popularStarships = starships;
+            const popularPlanets = planets;
+            console.log(response);
+
+            dispatch("showToast", {
+              message: "Results found",
+              context: "success"
+            });
 
             // strip out unwanted data and reduce response to first 6 objects
 
