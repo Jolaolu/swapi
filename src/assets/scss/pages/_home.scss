@@ -53,4 +53,14 @@
             margin: 2rem
         }
     }
+    .isLoading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .toast-wrapper{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 }

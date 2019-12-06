@@ -1,0 +1,30 @@
+.starship-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .starship-image__wrapper{
+        margin-top: 2rem;
+    }
+    .starship-picture{
+        height: 300px;
+        
+    }
+    .starship-name{
+        margin: 3rem 0;
+        text-align: center;
+        font-size: 2.5rem;
+
+    }
+    .starship-information{
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        div{
+            display: block;
+             margin: 2rem;
+             strong{
+                 margin-right: .5rem;
+             }
+        }
+    }
+}

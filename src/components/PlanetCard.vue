@@ -1,6 +1,8 @@
 <template>
   <article class="planetcard">
-    <router-link to="">
+    <router-link
+      :to="{ name: 'Planet', params: { id: planet.id, planet: planet } }"
+    >
       <div class="planetcard-image__wrapper">
         <img :src="getRandomImage()" alt="" srcset="" />
       </div>
@@ -25,10 +27,9 @@ export default {
   methods: {
     getRandomImage() {
       const number = getRandomNumber(this.images.length);
-      return this.selectedImage = this.images[number];
+      return (this.selectedImage = this.images[number]);
     }
   },
-  created() {
-  }
+  created() {}
 };
 </script>

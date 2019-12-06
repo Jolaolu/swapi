@@ -1,13 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { spliceData } from "@/utils/helpers";
+import createPersistedState from "vuex-persistedstate";
+import { spliceData, capitalizeItem, reconstructObject } from "@/utils/helpers";
 import http from "@/utils/service";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    characters: [],
+    people: [],
     planets: [],
     starships: [],
     loading: true,
@@ -26,8 +27,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setCharacters(state, characters) {
-      state.characters = characters;
+    setPeople(state, people) {
+      state.people = people;
     },
     setStarships(state, starships) {
       state.starships = starships;
@@ -56,7 +57,7 @@ export default new Vuex.Store({
   },
   getters: {
     isLoading: state => state.loading,
-    characters: state => state.characters,
+    people: state => state.people,
     starships: state => state.starships,
     planets: state => state.planets,
     toast: state => state.toast,
@@ -77,20 +78,37 @@ export default new Vuex.Store({
         http.get("/planets/")
       ])
         .then(response => {
-          const [characters, starships, planets] = response;
+          const [people, starships, planets] = response;
 
-          const popularCharacters = characters.data.results;
+          const popularPeople = people.data.results;
           const popularStarships = starships.data.results;
           const popularPlanets = planets.data.results;
-          console.log(response);
-          console.log(popularCharacters, popularStarships, popularPlanets);
+          const data = [];
+          data.push(
+            reconstructObject(popularPeople),
+            reconstructObject(popularStarships),
+            reconstructObject(popularPlanets)
+          );
+          return data;
+        })
+        .then(data => {
+      
+
+          const [people, starships, planets] = data;
+
+          const popularPeople = people;
+          const popularStarships = starships;
+          const popularPlanets = planets;
+
+        
+
           // strip out unwanted data and reduce response to first 6 objects
 
-          spliceData(popularCharacters, 4);
+          spliceData(popularPeople, 4);
           spliceData(popularStarships, 6);
           spliceData(popularPlanets, 9);
 
-          commit("setCharacters", popularCharacters);
+          commit("setPeople", popularPeople);
           commit("setStarships", popularStarships);
           commit("setPlanets", popularPlanets);
 
@@ -105,36 +123,91 @@ export default new Vuex.Store({
       commit("Loading", true);
       try {
         await Promise.all([
-          await http.get(`/character/?name=${searchItem}`),
-          await http.get(`/location/?name=${searchItem}`),
-          await http.get(`/episode/?name=${searchItem}`)
-        ]).then(response => {
-          const [characters, locations, episodes] = response;
-          const popularCharacters = characters.data.results;
-          const popularLocations = locations.data.results;
-          const popularEpisodes = episodes.data.results;
+          await http.get(`/people/?search=${searchItem}`),
+          await http.get(`/starships/?search=${searchItem}`),
+          await http.get(`/planets/?search=${searchItem}`)
+        ])
+          .then(response => {
+            const [people, starships, planets] = response;
 
-          dispatch("showToast", {
-            message: "Results found",
-            context: "success"
+            const popularPeople = people.data.results;
+            const popularStarships = starships.data.results;
+            const popularPlanets = planets.data.results;
+            const data = [];
+            data.push(
+              reconstructObject(popularPlanets),
+              reconstructObject(popularPeople),
+              reconstructObject(popularStarships)
+            );
+            return data;
+          })
+          .then(response => {
+      
+            const [people, starships, planets] = response;
+            const popularPeople = people;
+            const popularStarships = starships;
+            const popularPlanets = planets;
+
+            if (
+              people.data.count === 0 &&
+              starships.data.count === 0 &&
+              planets.data.count === 0
+            ) {
+              dispatch("showToast", {
+                message: "Results not found",
+                context: "error"
+              });
+            } else {
+              dispatch("showToast", {
+                message: "Results found",
+                context: "success"
+              });
+            }
+
+            // strip out unwanted data and reduce response to first 6 objects
+
+            spliceData(popularPeople, 4);
+            spliceData(popularStarships, 6);
+            spliceData(popularPlanets, 9);
+
+            commit("setPeople", popularPeople);
+            commit("setStarships", popularStarships);
+            commit("setPlanets", popularPlanets);
+
+            commit("Loading", false);
           });
-
-          // strip out unwanted data and reduce response to first 6 objects
-
-          spliceData(popularCharacters);
-          spliceData(popularLocations);
-          spliceData(popularEpisodes);
-
-          commit("Characters", popularCharacters);
-          commit("Locations", popularLocations);
-          commit("Episodes", popularEpisodes);
-
-          commit("Loading", false);
-        });
       } catch (error) {
         const message = error;
         dispatch("showToast", { message: message, context: "error" });
       }
+    },
+    fetchList({ commit, dispatch }, item) {
+      commit("Loading", true);
+      http
+        .get(`${item}`)
+        .then(response => {
+          const data = response.data.results;
+          return reconstructObject(data);
+        })
+        .then(response => {
+          console.log(response);
+
+          const capitalized = capitalizeItem(item);
+          console.log(capitalized);
+
+          commit(`set${capitalized}`, response);
+
+          commit("Loading", false);
+        })
+        .catch(response => {
+          const message = response;
+          dispatch("showToast", { message: message, context: "error" });
+        });
     }
-  }
+  },
+  plugins: [
+    createPersistedState({
+      storage: window.sessionStorage
+    })
+  ]
 });

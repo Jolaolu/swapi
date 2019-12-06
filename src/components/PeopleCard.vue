@@ -6,10 +6,21 @@
       </div>
       <div class="peoplecard-details">
         <div class="peoplecard-info">
-          <h3 class="peoplecard-title">{{ character.name }}</h3>
-          <span class="year"> <strong> Birth Year: </strong>  {{character.birth_year}}</span>
-          <span class="Gender"><strong> Gender: </strong> {{character.gender}}</span>
-          <div class="button-wrapper"></div>
+          <h3 class="peoplecard-title">{{ person.name }}</h3>
+          <span class="year">
+            <strong> Birth Year: </strong> {{ person.birth_year }}</span
+          >
+          <span class="Gender"
+            ><strong> Gender: </strong> {{ person.gender }}</span
+          >
+          <div class="button-wrapper">
+            <router-link
+              :to="{
+                name: 'Person',
+                params: { id: person.id, person: person }
+              }"
+            ></router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -28,7 +39,7 @@ export default {
       selectedImage: null
     };
   },
-  props: ["character"],
+  props: ["person"],
   components: {},
   methods: {
     getRandomImage() {

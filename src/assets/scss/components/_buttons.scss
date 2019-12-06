@@ -25,8 +25,20 @@
     text-transform: uppercase;
     color: $tertiary-color;
     font-size: 1.2rem ;
+    font-weight: 500;
     padding: 1.2rem 15rem;
     outline: none;
      cursor: pointer;
   
+}
+.back-button{
+    display: flex;
+    color: $black;
+    margin-left: 5rem;
+    text-transform: capitalize;
+    span{
+        margin-left: 2rem;
+        padding-top: 2rem;
+        text-decoration: underline;
+    }
 }

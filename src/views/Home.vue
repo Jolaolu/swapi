@@ -1,19 +1,36 @@
 <template>
   <div class="home">
-    <Header />
+    <Header @emitting="getSearchTerm" />
+
     <main class="home-content">
+      <div class="toast-wrapper">
+        <Toast
+          :message="toast.message"
+          :context="toast.context"
+          v-if="toast.show"
+        />
+      </div>
       <section class="starships-list">
         <div class="home-content__title-wrapper">
           <h3 class="home-content__title">Popular Starships</h3>
           <div class="title-underline"></div>
         </div>
+        <div class="isLoading" v-if="isLoading">
+          <Loader />
+        </div>
         <div class="popular-starships">
-          <div class="starship-card" v-for="(starship, index) in starships" :key="index">
-            <StarshipCard :starship="starship" />
+          <div
+            class="starship-card"
+            v-for="(starship, index) in starships"
+            :key="index"
+          >
+            <StarshipCard :starship="starship" v-if="!isLoading" />
           </div>
         </div>
         <div class="viewmore-button">
-          <ViewMore />
+          <router-link to="/starships">
+            <ViewMore />
+          </router-link>
         </div>
       </section>
       <section class="planets-list">
@@ -21,13 +38,22 @@
           <h3 class="home-content__title">Popular Planets</h3>
           <div class="title-underline"></div>
         </div>
+        <div class="isLoading" v-if="isLoading">
+          <Loader />
+        </div>
         <div class="popular-planets">
-          <div class="planet-card" v-for="(planet, index) in planets" :key="index">
-            <PlanetCard :planet="planet" />
+          <div
+            class="planet-card"
+            v-for="(planet, index) in planets"
+            :key="index"
+          >
+            <PlanetCard :planet="planet" v-if="!isLoading" />
           </div>
         </div>
         <div class="viewmore-button">
-          <PlanetCardNav />
+          <router-link to="/planets">
+            <PlanetCardNav />
+          </router-link>
         </div>
       </section>
       <section class="people-list">
@@ -35,13 +61,22 @@
           <h3 class="home-content__title">Popular Characters</h3>
           <div class="title-underline"></div>
         </div>
+        <div class="isLoading" v-if="isLoading">
+          <Loader />
+        </div>
         <div class="popular-characters">
-          <div class="people-card" v-for="(character, index) in characters" :key="index">
-            <PeopleCard :character="character" />
+          <div
+            class="people-card"
+            v-for="(person, index) in people"
+            :key="index"
+          >
+            <PeopleCard :person="person" v-if="!isLoading" />
           </div>
         </div>
         <div class="viewmore-button">
-          <ViewMore />
+          <router-link to="/people">
+            <ViewMore />
+          </router-link>
         </div>
       </section>
     </main>
@@ -54,6 +89,17 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "home",
+  data() {
+    return {
+      searchItem: ""
+    };
+  },
+  props: {
+    q: {
+      type: String,
+      default: null
+    }
+  },
   components: {
     Header: () => import("@/components/Header.vue"),
     StarshipCard: () => import("@/components/StarshipCard.vue"),
@@ -61,16 +107,30 @@ export default {
     PeopleCard: () => import("@/components/PeopleCard.vue"),
     ViewMore: () => import("@/components/ViewMoreButton"),
     PlanetCardNav: () => import("@/components/PlanetCardNav.vue"),
-    // Loader: () => import("@/components/Loader.vue"),
-    // Toast: () => import("@/components/Toast.vue"),
+    Loader: () => import("@/components/Loader.vue"),
+    Toast: () => import("@/components/Toast.vue"),
     Footer: () => import("@/components/Footer.vue")
   },
   methods: {
-    ...mapActions(["fetchPopularData"])
+    ...mapActions(["fetchPopularData"]),
+
+    makeSearchRequest: function() {
+      this.$router.push({
+        name: "search",
+        query: { q: this.searchItem }
+      });
+      const searchQuery = this.searchItem;
+      this.$store.dispatch("searchPopularData", searchQuery);
+    },
+
+    getSearchTerm: function(searchValue) {
+      this.searchItem = searchValue;
+      this.makeSearchRequest();
+    }
   },
-  created() {
+  mounted() {
     this.fetchPopularData();
   },
-  computed: mapGetters(["characters", "planets", "starships"])
+  computed: mapGetters(["people", "planets", "starships", "isLoading", "toast"])
 };
 </script>
