@@ -18,13 +18,7 @@
           <Loader />
         </div>
         <div class="popular-starships">
-          <div
-            class="starship-card"
-            v-for="(starship, index) in starships"
-            :key="index"
-          >
-            <StarshipCard :starship="starship" v-if="!isLoading" />
-          </div>
+            <StarshipCard :starships="starships" v-if="!isLoading" />
         </div>
       </section>
       <Pagination @changing="changePage" />

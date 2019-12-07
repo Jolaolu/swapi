@@ -1,38 +1,36 @@
 <template>
-  <article class="starshipcard">
-    <div class="starshipcard-image__wrapper">
-      <img class="starship-image" :src="getRandomImage()" alt srcset />
-    </div>
-    <div class="starshipcard-details__wrapper">
-      <div class="starshipcard-info__wrapper">
-        <div class="starshipcard-info">
-          <h3 class="starshipcard-title">{{ starship.name }}</h3>
-          <span class="model">
-            <strong>Model:</strong>
-            {{ starship.model }}
-          </span>
-          <span class="capacity">
-            <strong>Capacity:</strong>
-            {{ starship.cargo_capacity }}
-          </span>
-          <!-- <span class="manufacturer">
-            <strong>Manufacturer:</strong>
-            {{starship.manufacturer}}
-          </span> -->
-          <div class="button-wrapper">
-            <router-link
-              :to="{
+  <div class="starshipcard-wrapper">
+    <article class="starshipcard" v-for="(starship, index) in starships" :key="index">
+      <div class="starshipcard-image__wrapper">
+        <img class="starship-image" :src="getRandomImage()" alt srcset />
+      </div>
+      <div class="starshipcard-details__wrapper">
+        <div class="starshipcard-info__wrapper">
+          <div class="starshipcard-info">
+            <h3 class="starshipcard-title">{{ starship.name }}</h3>
+            <span class="model">
+              <strong>Model:</strong>
+              {{ starship.model }}
+            </span>
+            <span class="capacity">
+              <strong>Capacity:</strong>
+              {{ starship.cargo_capacity }}
+            </span>
+            <div class="button-wrapper">
+              <router-link
+                :to="{
                 name: 'Starship',
                 params: { id: starship.id, starship: starship }
               }"
-            >
-              <ReadMore />
-            </router-link>
+              >
+                <ReadMore />
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </article>
+    </article>
+  </div>
 </template>
 <script>
 import { getRandomNumber } from "@/utils/helpers";
@@ -59,7 +57,7 @@ export default {
   components: {
     ReadMore: () => import("@/components/ReadMoreButton")
   },
-  props: ["starship"],
+  props: ["starships"],
   methods: {
     getRandomImage() {
       const number = getRandomNumber(this.images.length);

@@ -19,13 +19,8 @@
           <Loader />
         </div>
         <div class="popular-starships">
-          <div
-            class="starship-card"
-            v-for="(starship, index) in starships"
-            :key="index"
-          >
-            <StarshipCard :starship="starship" v-if="!isLoading" />
-          </div>
+
+            <StarshipCard :starships="starships" v-if="!isLoading" />
         </div>
         <div class="viewmore-button">
           <router-link to="/starships">
@@ -42,14 +37,8 @@
           <Loader />
         </div>
         <div class="popular-planets">
-          <div
-            class="planet-card"
-            v-for="(planet, index) in planets"
-            :key="index"
-          >
-            <PlanetCard :planet="planet" v-if="!isLoading" />
+            <PlanetCard :planets="planets" v-if="!isLoading" />
           </div>
-        </div>
         <div class="viewmore-button">
           <router-link to="/planets">
             <PlanetCardNav />
@@ -65,13 +54,8 @@
           <Loader />
         </div>
         <div class="popular-characters">
-          <div
-            class="people-card"
-            v-for="(person, index) in people"
-            :key="index"
-          >
-            <PeopleCard :person="person" v-if="!isLoading" />
-          </div>
+         
+            <PeopleCard :people="people" v-if="!isLoading" />
         </div>
         <div class="viewmore-button">
           <router-link to="/people">

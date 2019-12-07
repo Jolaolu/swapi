@@ -1,22 +1,25 @@
-.planetcard{
+.planetcard-wrapper{
     width: 100%;
-    margin: 2rem 0;
-    .planetcard-image__wrapper{
+    margin: 4rem 0;
+}
+.planetcard{
+    margin: 2rem;
+}
+ .planetcard-image__wrapper{
         width: 100%;
-    }
-    .planetcard-title{
-        color: $white;
-        margin-top: -5rem;
-        text-align: center;
-        font-weight: 500;
-        font-size: 1.8rem;
-        letter-spacing: .1rem;
-    }
-
+ }
+.planetcard-title{
+    color: $white;
+    margin-top: -5rem;       
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.8rem;
+    letter-spacing: .1rem;
 }
 .circlenav-container{
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .circlenav{
     height: 2rem;
@@ -30,3 +33,43 @@
           background-color: $tertiary-color;
     }
 }
+
+ @media (min-width: 1025px) {
+    .planetcard-wrapper{
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        row-gap: 2rem;
+        column-gap: 2rem ;
+        align-content: space-between;
+        justify-content: center;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .planetcard-wrapper{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      
+    }
+    .planetcard{
+        width: 40%;
+    }
+}
+  
+
+
+@media (max-width: 767px) {
+    .planetcard-wrapper{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      
+    }
+     .planetcard{
+        width: 80%;
+        
+    }
+}
+ 

@@ -1,14 +1,19 @@
+.peoplecard{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: centeR;
+    margin: 3rem 0;
+}
+.peoplecard-container__wrapper{
 
-
-    .peoplecard-container__wrapper{
-        width: 95%;
-        margin: 2rem;
+    margin: 2rem;
     
-    }
-      .peoplecard-container{
+ }
+
+  
+    .peoplecard-container{
         width: 100%; 
-        display: grid;
-        grid-template-columns: 58% 42% ;
       }
     .peoplecard-image__wrapper{
         // width: 100%; 
@@ -40,4 +45,43 @@
     
 
 
-     
+ @media (min-width: 1025px) {
+
+    .peoplecard-container__wrapper{
+        width: 40%;
+    }
+      .peoplecard-container{
+        display: grid;
+        grid-template-columns: 58% 42% ;
+      }
+   
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .peoplecard-container__wrapper{
+        width: 40%;
+      
+    
+    }
+      .peoplecard-container{
+        display: grid;
+        grid-template-columns: 58% 42% ;
+      }
+  
+}
+
+
+@media (max-width: 767px) {
+  
+  
+    .peoplecard-container__wrapper{
+        width: 90%;
+        
+    }
+      .peoplecard-container{
+        display: grid;
+        grid-template-row: 58% 42% ;
+      }
+  
+}

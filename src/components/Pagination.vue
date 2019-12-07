@@ -38,8 +38,7 @@ export default {
   button {
     font-size: 2rem;
     margin: 0.2em 0;
-    padding: 0.5rem 1.5rem;
-    /* border-radius: .5rem; */
+    padding: 0.5rem 1rem;
     cursor: pointer;
     color: #878790;
   }

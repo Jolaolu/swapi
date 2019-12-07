@@ -18,13 +18,7 @@
           <Loader />
         </div>
         <div class="popular-planets">
-          <div
-            class="planet-card"
-            v-for="(planet, index) in planets"
-            :key="index"
-          >
-            <PlanetCard :planet="planet" v-if="!isLoading" />
-          </div>
+            <PlanetCard :planets="planets" v-if="!isLoading" />
         </div>
       </section>
       <div class="pagination-wrapper"> 

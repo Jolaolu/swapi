@@ -1,12 +1,10 @@
 .search-wrapper{
     width:100%;
-    margin: 5rem 0 2rem 0;
     display: flex;
     justify-content: center;
    .search-container{
         display: grid;
         grid-template-columns: 8% 92%;
-        width: 60%;
         max-width: 100%;
         background: $secondary-color;
         border-radius: .4em;
@@ -24,7 +22,6 @@
                 padding: 1.5rem;
                 border: none;
                 width: 85%;
-                font-size: 2rem;
                 font-weight: 500;
                 background: $secondary-color;
                 &:focus{
@@ -36,4 +33,44 @@
         }
     }
 
+}
+@media only screen and (min-width: 1025px){
+    .search-wrapper{
+         margin: 5rem 0 2rem 0;
+    }
+     .search-container{
+        width: 60%;
+    }
+    .search{
+        .search-field{
+            font-size: 2rem;
+        }
+    }      
+}
+@media only screen and (min-width:768px) and (max-width:1024px){
+    .search-wrapper{
+         margin: 2rem 0 2rem 0;
+    }
+     .search-container{
+        width: 80%;
+    }
+    .search{
+        .search-field{
+            font-size: 1.2rem;
+        }
+    }  
+    
+}
+@media only screen and (max-width: 767px){
+    .search-wrapper{
+        margin: 5rem 0 2rem 0;
+    }
+     .search-container{
+        width: 80%;
+    }
+       search{
+        .search-field{
+            font-size: 1.3rem;
+        }
+    }  
 }

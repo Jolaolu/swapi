@@ -1,32 +1,36 @@
 <template>
-  <article class="peoplecard-container__wrapper">
-    <div class="peoplecard-container">
-      <div class="peoplecard-image__wrapper">
-        <img :src="getRandomImage()" alt srcset class="person-image" />
-      </div>
-      <div class="peoplecard-details">
-        <div class="peoplecard-info">
-          <h3 class="peoplecard-title">{{ person.name }}</h3>
-          <span class="year">
-            <strong> Birth Year: </strong> {{ person.birth_year }}</span
-          >
-          <span class="Gender"
-            ><strong> Gender: </strong> {{ person.gender }}</span
-          >
-          <div class="button-wrapper">
-            <router-link
-              :to="{
+  <div class="peoplecard">
+    <article class="peoplecard-container__wrapper" v-for="(person, index) in people" :key="index">
+      <div class="peoplecard-container">
+        <div class="peoplecard-image__wrapper">
+          <img :src="getRandomImage()" alt srcset class="person-image" />
+        </div>
+        <div class="peoplecard-details">
+          <div class="peoplecard-info">
+            <h3 class="peoplecard-title">{{ person.name }}</h3>
+            <span class="year">
+              <strong>Birth Year:</strong>
+              {{ person.birth_year }}
+            </span>
+            <span class="Gender">
+              <strong>Gender:</strong>
+              {{ person.gender }}
+            </span>
+            <div class="button-wrapper">
+              <router-link
+                :to="{
                 name: 'Person',
                 params: { id: person.id, person: person }
               }"
-            >
-              <ReadMore
-            /></router-link>
+              >
+                <ReadMore />
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </article>
+    </article>
+  </div>
 </template>
 <script>
 import { getRandomNumber } from "@/utils/helpers";
@@ -41,7 +45,7 @@ export default {
       selectedImage: null
     };
   },
-  props: ["person"],
+  props: ["people"],
   components: {
     ReadMore: () => import("@/components/ReadMore")
   },

@@ -1,15 +1,16 @@
 <template>
-  <article class="planetcard">
-    <router-link
-      :to="{ name: 'Planet', params: { id: planet.id, planet: planet } }"
-    >
-      <div class="planetcard-image__wrapper">
-        <img :src="getRandomImage()" alt="" srcset="" />
-      </div>
-      <div class="planetcard-title">{{ planet.name }}</div>
-    </router-link>
-  </article>
+  <div class="planetcard-wrapper">
+    <article class="planetcard" v-for="(planet, index) in planets" :key="index">
+      <router-link :to="{ name: 'Planet', params: { id: planet.id, planet: planet } }">
+        <div class="planetcard-image__wrapper">
+          <img :src="getRandomImage()" alt srcset />
+        </div>
+        <div class="planetcard-title">{{ planet.name }}</div>
+      </router-link>
+    </article>
+  </div>
 </template>
+
 <script>
 import { getRandomNumber } from "@/utils/helpers";
 import planet1 from "@/assets/images/planet-1.jpg";
@@ -23,7 +24,7 @@ export default {
     };
   },
   components: {},
-  props: ["planet"],
+  props: ["planets"],
   methods: {
     getRandomImage() {
       const number = getRandomNumber(this.images.length);

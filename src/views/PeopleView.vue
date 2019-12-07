@@ -18,13 +18,7 @@
           <Loader />
         </div>
         <div class="popular-characters">
-          <div
-            class="people-card"
-            v-for="(person, index) in people"
-            :key="index"
-          >
-            <PeopleCard :person="person" v-if="!isLoading" />
-          </div>
+            <PeopleCard :people="people" v-if="!isLoading" />
         </div>
       </section>
       <Pagination @changing="changePage" />
