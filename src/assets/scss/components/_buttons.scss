@@ -18,6 +18,7 @@
 }
 
 .viewmore{
+    margin-top: 2rem;
     text-align: center;
     border: .2rem solid $black;  
     border-radius: .4rem;
@@ -31,10 +32,16 @@
      cursor: pointer;
   
 }
+@media  (max-width:767px){
+    .viewmore{
+       
+      padding: 1.2rem 10rem;
+    }
+}
 .back-button{
     display: flex;
     color: $black;
-    margin-left: 5rem;
+    // margin-left: 3rem;
     text-transform: capitalize;
     span{
         margin-left: 2rem;

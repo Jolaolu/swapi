@@ -38,10 +38,11 @@ import character1 from "@/assets/images/character-1.jpg";
 import character2 from "@/assets/images/character-2.jpg";
 import character3 from "@/assets/images/character-3.jpg";
 import character4 from "@/assets/images/character-4.jpg";
+import yoda from "@/assets/images/baby-yoda-plush-toy-mattel-the-mandalorian.png"
 export default {
   data() {
     return {
-      images: [character1, character2, character3, character4],
+      images: [character1, character2, character3, character4, yoda],
       selectedImage: null
     };
   },
