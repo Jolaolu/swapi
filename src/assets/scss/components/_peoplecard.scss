@@ -41,12 +41,24 @@
         justify-content: flex-end;
     }
     
-
+.filter{
+  padding-left: 5rem ;
+  label{
+    margin-right: .5rem;
+  }
+  select{
+    padding: 1rem 1.3rem;
+    background-color: $white;
+    font-size: 1.2rem;
+    text-align: center;
+    outline-color: $tertiary-color;
+  }
+}
 
  @media (min-width: 1025px) {
 
     .article{
-        width: 619px;
+        width: 550px;
     }
       .peoplecard-container{
         display: grid;
@@ -58,7 +70,7 @@
 @media (min-width: 768px) and (max-width: 1024px) {
 
     .article{
-        width: 619px;
+        width: 550px;
       
     
     }
