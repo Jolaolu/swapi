@@ -1,7 +1,9 @@
 <template>
   <div class="planetcard-wrapper">
     <article class="planetcard" v-for="(planet, index) in planets" :key="index">
-      <router-link :to="{ name: 'Planet', params: { id: planet.id, planet: planet } }">
+      <router-link
+        :to="{ name: 'Planet', params: { id: planet.id, planet: planet } }"
+      >
         <div class="planetcard-image__wrapper">
           <img :src="getRandomImage()" alt srcset />
         </div>

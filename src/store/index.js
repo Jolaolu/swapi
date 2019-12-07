@@ -42,7 +42,7 @@ export default new Vuex.Store({
     Toast(state, payload) {
       state.toast = { ...payload };
     },
-    setFromTo ( state, {from,to }) {
+    setFromTo(state, { from, to }) {
       state.pageDetails.from += from;
       state.pageDetails.to += to;
     },
@@ -53,7 +53,7 @@ export default new Vuex.Store({
       state.pageDetails.totalData = payload;
     },
     setTotalPages(state, { perPage, totalItems }) {
-      state.pageDetails.totalPages = Math.ceil( totalItems / perPage);
+      state.pageDetails.totalPages = Math.ceil(totalItems / perPage);
     }
   },
   getters: {
@@ -184,18 +184,20 @@ export default new Vuex.Store({
         .get(`${item}/?page=${state.currentPage}`)
         .then(response => {
           const data = response.data.results;
-          console.log(response);
-        
-          commit( "setTotalData", response.data.count );
 
-          commit( "setTotalPages", {
+          commit("setTotalData", response.data.count);
+
+          commit("setTotalPages", {
             perPage: state.pageDetails.perPage,
             totalItems: state.pageDetails.totalData
-          } );
-          if ( state.currentPage === 1 ) {
-            commit( "setFromTo", { from: state.pageDetails.from -1, to: state.pageDetails.perPage } )
+          });
+          if (state.currentPage === 1) {
+            commit("setFromTo", {
+              from: state.pageDetails.from - 1,
+              to: state.pageDetails.perPage
+            });
           }
-         
+
           return reconstructObject(data);
         })
         .then(response => {
@@ -240,8 +242,11 @@ export default new Vuex.Store({
     changePage({ commit, dispatch, state }, { value, item }) {
       switch (value) {
         case "next":
-          commit( "currentPage", 1 );
-          commit( "setFromTo", { from: state.pageDetails.from + 10 - 1, to: state.pageDetails.to + 10  } )
+          commit("currentPage", 1);
+          commit("setFromTo", {
+            from: state.pageDetails.from + 10 - 1,
+            to: state.pageDetails.to + 10
+          });
 
           dispatch("fetchList", item);
           if (state.currentPage > state.pageDetails.totalPages) {
@@ -254,12 +259,13 @@ export default new Vuex.Store({
           }
           break;
         case "previous":
-          commit( "currentPage", -1 );
-          commit( "setFromTo", { from: state.pageDetails.from - 10 + 1, to: state.pageDetails.to - 10 } )
+          commit("currentPage", -1);
+          commit("setFromTo", {
+            from: state.pageDetails.from - 10 + 1,
+            to: state.pageDetails.to - 10
+          });
 
           dispatch("fetchList", item);
-
-          console.log(state.currentPage);
 
           if (state.currentPage < 1) {
             commit("currentPage", 1);
@@ -275,7 +281,7 @@ export default new Vuex.Store({
           break;
       }
     }
-  },
+  }
   // plugins: [
   //   createPersistedState({
   //     storage: window.sessionStorage

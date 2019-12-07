@@ -1,6 +1,10 @@
 <template>
   <div class="starshipcard-wrapper">
-    <article class="starshipcard" v-for="(starship, index) in starships" :key="index">
+    <article
+      class="starshipcard"
+      v-for="(starship, index) in starships"
+      :key="index"
+    >
       <div class="starshipcard-image__wrapper">
         <img class="starship-image" :src="getRandomImage()" alt srcset />
       </div>
@@ -19,9 +23,9 @@
             <div class="button-wrapper">
               <router-link
                 :to="{
-                name: 'Starship',
-                params: { id: starship.id, starship: starship }
-              }"
+                  name: 'Starship',
+                  params: { id: starship.id, starship: starship }
+                }"
               >
                 <ReadMore />
               </router-link>

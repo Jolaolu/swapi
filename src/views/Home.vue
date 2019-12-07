@@ -19,8 +19,7 @@
           <Loader />
         </div>
         <div class="popular-starships">
-
-            <StarshipCard :starships="starships" v-if="!isLoading" />
+          <StarshipCard :starships="starships" v-if="!isLoading" />
         </div>
         <div class="viewmore-button">
           <router-link to="/starships">
@@ -37,8 +36,8 @@
           <Loader />
         </div>
         <div class="popular-planets">
-            <PlanetCard :planets="planets" v-if="!isLoading" />
-          </div>
+          <PlanetCard :planets="planets" v-if="!isLoading" />
+        </div>
         <div class="viewmore-button">
           <router-link to="/planets">
             <PlanetCardNav />
@@ -54,8 +53,7 @@
           <Loader />
         </div>
         <div class="popular-characters">
-         
-            <PeopleCard :people="people" v-if="!isLoading" />
+          <PeopleCard :people="people" v-if="!isLoading" />
         </div>
         <div class="viewmore-button">
           <router-link to="/people">

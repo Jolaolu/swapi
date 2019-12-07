@@ -18,7 +18,7 @@
           <Loader />
         </div>
         <div class="popular-characters">
-            <PeopleCard :people="people" v-if="!isLoading" />
+          <PeopleCard :people="people" v-if="!isLoading" />
         </div>
       </section>
       <Pagination @changing="changePage" />

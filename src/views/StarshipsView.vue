@@ -18,7 +18,7 @@
           <Loader />
         </div>
         <div class="popular-starships">
-            <StarshipCard :starships="starships" v-if="!isLoading" />
+          <StarshipCard :starships="starships" v-if="!isLoading" />
         </div>
       </section>
       <Pagination @changing="changePage" />

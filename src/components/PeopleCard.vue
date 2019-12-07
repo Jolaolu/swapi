@@ -1,6 +1,10 @@
 <template>
   <div class="peoplecard">
-    <article class="peoplecard-container__wrapper" v-for="(person, index) in people" :key="index">
+    <article
+      class="peoplecard-container__wrapper"
+      v-for="(person, index) in people"
+      :key="index"
+    >
       <div class="peoplecard-container">
         <div class="peoplecard-image__wrapper">
           <img :src="getRandomImage()" alt srcset class="person-image" />
@@ -19,9 +23,9 @@
             <div class="button-wrapper">
               <router-link
                 :to="{
-                name: 'Person',
-                params: { id: person.id, person: person }
-              }"
+                  name: 'Person',
+                  params: { id: person.id, person: person }
+                }"
               >
                 <ReadMore />
               </router-link>
@@ -38,7 +42,7 @@ import character1 from "@/assets/images/character-1.jpg";
 import character2 from "@/assets/images/character-2.jpg";
 import character3 from "@/assets/images/character-3.jpg";
 import character4 from "@/assets/images/character-4.jpg";
-import yoda from "@/assets/images/baby-yoda-plush-toy-mattel-the-mandalorian.png"
+import yoda from "@/assets/images/baby-yoda-plush-toy-mattel-the-mandalorian.png";
 export default {
   data() {
     return {

@@ -18,14 +18,16 @@
           <Loader />
         </div>
         <div class="popular-planets">
-            <PlanetCard :planets="planets" v-if="!isLoading" />
+          <PlanetCard :planets="planets" v-if="!isLoading" />
         </div>
       </section>
-      <div class="pagination-wrapper"> 
-        <div class="pagination-info">{{pageDetails.from}} - {{pageDetails.to}} of {{pageDetails.totalData}} </div>
-          <Pagination @changing="changePage" />
+      <div class="pagination-wrapper">
+        <div class="pagination-info">
+          {{ pageDetails.from }} - {{ pageDetails.to }} of
+          {{ pageDetails.totalData }}
+        </div>
+        <Pagination @changing="changePage" />
       </div>
-    
     </main>
     <Footer />
   </div>
