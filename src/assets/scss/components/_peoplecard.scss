@@ -1,16 +1,15 @@
-.peoplecard{
+.people-container{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: centeR;
     margin: 3rem 0;
 }
-.peoplecard-container__wrapper{
+.article{
 
     margin: 2rem;
     
  }
-
   
     .peoplecard-container{
         width: 100%; 
@@ -47,8 +46,8 @@
 
  @media (min-width: 1025px) {
 
-    .peoplecard-container__wrapper{
-        width: 40%;
+    .article{
+        width: 619px;
     }
       .peoplecard-container{
         display: grid;
@@ -59,8 +58,8 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
 
-    .peoplecard-container__wrapper{
-        width: 40%;
+    .article{
+        width: 619px;
       
     
     }
@@ -75,7 +74,7 @@
 @media (max-width: 767px) {
   
   
-    .peoplecard-container__wrapper{
+    .article{
         width: 90%;
         
     }

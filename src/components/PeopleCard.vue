@@ -1,10 +1,5 @@
 <template>
-  <div class="peoplecard">
-    <article
-      class="peoplecard-container__wrapper"
-      v-for="(person, index) in people"
-      :key="index"
-    >
+    <article class="article" >
       <div class="peoplecard-container">
         <div class="peoplecard-image__wrapper">
           <img :src="getRandomImage()" alt srcset class="person-image" />
@@ -34,7 +29,6 @@
         </div>
       </div>
     </article>
-  </div>
 </template>
 <script>
 import { getRandomNumber } from "@/utils/helpers";
@@ -50,7 +44,7 @@ export default {
       selectedImage: null
     };
   },
-  props: ["people"],
+  props: ["person"],
   components: {
     ReadMore: () => import("@/components/ReadMore")
   },

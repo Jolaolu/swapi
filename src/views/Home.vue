@@ -4,11 +4,7 @@
 
     <main class="home-content">
       <div class="toast-wrapper">
-        <Toast
-          :message="toast.message"
-          :context="toast.context"
-          v-if="toast.show"
-        />
+        <Toast :message="toast.message" :context="toast.context" v-if="toast.show" />
       </div>
       <section class="starships-list">
         <div class="home-content__title-wrapper">
@@ -53,7 +49,11 @@
           <Loader />
         </div>
         <div class="popular-characters">
-          <PeopleCard :people="people" v-if="!isLoading" />
+          <div class="people-container">
+            <div class v-for="(person, index) in people" :key="index">
+              <PeopleCard :person="person" v-if="!isLoading" />
+            </div>
+          </div>
         </div>
         <div class="viewmore-button">
           <router-link to="/people">

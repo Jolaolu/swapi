@@ -1,13 +1,9 @@
 <template>
-  <div class="">
+  <section class>
     <Header @emitting="getSearchTerm" />
     <main class="home-content">
       <div class="toast-wrapper">
-        <Toast
-          :message="toast.message"
-          :context="toast.context"
-          v-if="toast.show"
-        />
+        <Toast :message="toast.message" :context="toast.context" v-if="toast.show" />
       </div>
       <section class="people-list">
         <div class="home-content__title-wrapper">
@@ -17,14 +13,31 @@
         <div class="isLoading" v-if="isLoading">
           <Loader />
         </div>
+
         <div class="popular-characters">
-          <PeopleCard :people="people" v-if="!isLoading" />
+          <div class="filter">
+            <label for="filterList">Filter:</label>
+            <select v-model="defaultFilter" name id>
+              <option
+                v-for="(gender, index) in genders"
+                :key="index"
+                :value="gender.toLowerCase()"
+              >{{gender}}</option>
+            </select>
+          </div>
+          <div class="people-container">
+            <div class="" v-for="(person, index) in people" :key="index">
+              <PeopleCard
+                v-if="defaultFilter === 'all' || person.gender === defaultFilter" :person="person"
+              />
+            </div>
+          </div>
         </div>
       </section>
       <Pagination @changing="changePage" />
     </main>
     <Footer />
-  </div>
+  </section>
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
@@ -32,7 +45,9 @@ export default {
   name: "home",
   data() {
     return {
-      searchItem: ""
+      searchItem: "",
+      defaultFilter: "all",
+      genders: ["All", "Male", "Female", "Hermaphrodite"]
     };
   },
   props: {
