@@ -4,7 +4,11 @@
 
     <main class="home-content">
       <div class="toast-wrapper">
-        <Toast :message="toast.message" :context="toast.context" v-if="toast.show" />
+        <Toast
+          :message="toast.message"
+          :context="toast.context"
+          v-if="toast.show"
+        />
       </div>
       <section class="starships-list">
         <div class="home-content__title-wrapper">

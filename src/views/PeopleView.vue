@@ -3,7 +3,11 @@
     <Header @emitting="getSearchTerm" />
     <main class="home-content">
       <div class="toast-wrapper">
-        <Toast :message="toast.message" :context="toast.context" v-if="toast.show" />
+        <Toast
+          :message="toast.message"
+          :context="toast.context"
+          v-if="toast.show"
+        />
       </div>
       <section class="people-list">
         <div class="home-content__title-wrapper">
@@ -22,13 +26,17 @@
                 v-for="(gender, index) in genders"
                 :key="index"
                 :value="gender.toLowerCase()"
-              >{{gender}}</option>
+                >{{ gender }}</option
+              >
             </select>
           </div>
           <div class="people-container">
             <div class="" v-for="(person, index) in people" :key="index">
               <PeopleCard
-                v-if="defaultFilter === 'all' || person.gender === defaultFilter" :person="person"
+                v-if="
+                  defaultFilter === 'all' || person.gender === defaultFilter
+                "
+                :person="person"
               />
             </div>
           </div>
