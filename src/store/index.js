@@ -16,14 +16,7 @@ export default new Vuex.Store({
       context: "",
       show: false
     },
-    currentPage: 1,
-    pageDetails: {
-      to: null,
-      from: 1,
-      perPage: 10,
-      totalData: null,
-      totalPages: null
-    }
+    totalPageData: null
   },
   mutations: {
     setPeople(state, people) {
@@ -41,18 +34,8 @@ export default new Vuex.Store({
     Toast(state, payload) {
       state.toast = { ...payload };
     },
-    setFromTo(state, { from, to }) {
-      state.pageDetails.from += from;
-      state.pageDetails.to += to;
-    },
-    currentPage(state, payload) {
-      state.currentPage += payload;
-    },
-    setTotalData(state, payload) {
-      state.pageDetails.totalData = payload;
-    },
-    setTotalPages(state, { perPage, totalItems }) {
-      state.pageDetails.totalPages = Math.ceil(totalItems / perPage);
+    setTotalPageData(state, payload) {
+      state.totalPageData = payload;
     }
   },
   getters: {
@@ -61,8 +44,7 @@ export default new Vuex.Store({
     starships: state => state.starships,
     planets: state => state.planets,
     toast: state => state.toast,
-    page: state => state.currentPage,
-    pageDetails: state => state.pageDetails
+    totalPageData: state => state.totalPageData
   },
   actions: {
     showToast({ commit }, { message, context }) {
@@ -177,25 +159,14 @@ export default new Vuex.Store({
         dispatch("showToast", { message: message, context: "error" });
       }
     },
-    fetchList ( { commit, dispatch }, { item, pageNumber }) {
+    fetchList({ commit, dispatch }, { item, pageNumber }) {
       commit("Loading", true);
       http
         .get(`${item}/?page=${pageNumber}`)
         .then(response => {
           const data = response.data.results;
 
-          commit("setTotalData", response.data.count);
-
-          commit("setTotalPages", {
-            perPage: state.pageDetails.perPage,
-            totalItems: state.pageDetails.totalData
-          });
-          if (state.currentPage === 1) {
-            commit("setFromTo", {
-              from: state.pageDetails.from - 1,
-              to: state.pageDetails.perPage
-            });
-          }
+          commit("setTotalPageData", response.data.count);
 
           return reconstructObject(data);
         })
@@ -227,6 +198,7 @@ export default new Vuex.Store({
           }
         })
         .then(response => {
+          //capitalize item
           const capitalized = capitalizeItem(item);
 
           commit(`set${capitalized}`, response);
@@ -237,48 +209,6 @@ export default new Vuex.Store({
           const message = response;
           dispatch("showToast", { message: message, context: "error" });
         });
-    },
-    changePage({ commit, dispatch }, { value, item }) {
-      switch (value) {
-        case "next":
-          commit("currentPage", 1);
-          commit("setFromTo", {
-            from: ,
-            to:
-          });
-
-          dispatch("fetchList", item);
-          if (currentPage > totalPages) {
-            commit("currentPage", -1);
-
-            dispatch("showToast", {
-              message: "End Of Info",
-              context: "error"
-            });
-          }
-          break;
-        case "previous":
-          commit("currentPage", -1);
-          commit("setFromTo", {
-            from:  - 10 + 1,
-            to:  - 10
-          });
-
-          dispatch("fetchList", item);
-
-          if (currentPage < 1) {
-            commit("currentPage", 1);
-
-            dispatch("showToast", {
-              message: "Beginning Of Info",
-              context: "error"
-            });
-          }
-          break;
-        default:
-          commit("currentPage", 0);
-          break;
-      }
     }
   }
 });

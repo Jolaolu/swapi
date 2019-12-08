@@ -31,7 +31,7 @@
             </select>
           </div>
           <div class="people-container">
-            <div class="" v-for="(person, index) in people" :key="index">
+            <div class v-for="(person, index) in people" :key="index">
               <PeopleCard
                 v-if="
                   defaultFilter === 'all' || person.gender === defaultFilter
@@ -42,7 +42,16 @@
           </div>
         </div>
       </section>
-      <Pagination @changing="changePage" />
+      <div class="pagination-wrapper">
+        <div class="pagination-info">
+          {{ pageDetails.from }} - {{ pageDetails.to }} of {{ totalPageData }}
+        </div>
+        <Pagination
+          @changing="changePage"
+          :totalPages="getPageCount()"
+          :currentPage="pageNumber"
+        />
+      </div>
     </main>
     <Footer />
   </section>
@@ -55,7 +64,14 @@ export default {
     return {
       searchItem: "",
       defaultFilter: "all",
-      genders: ["All", "Male", "Female", "Hermaphrodite"]
+      genders: ["All", "Male", "Female", "Hermaphrodite"],
+      pageNumber: 1,
+      totalPages: null,
+      pageDetails: {
+        to: null,
+        from: 1,
+        perPage: 10
+      }
     };
   },
   props: {
@@ -82,19 +98,49 @@ export default {
         item: "people"
       });
     },
+    getPageCount: function() {
+      const total = this.totalPageData;
 
+      const perPage = this.pageDetails.perPage;
+
+      return (this.totalPages = Math.ceil(total / perPage));
+    },
     getSearchTerm: function(searchValue) {
       this.searchItem = searchValue;
       this.makeSearchRequest();
     },
     changePage(value) {
-      this.$store.dispatch("changePage", { value: value, item: "people" });
+      switch (value) {
+        case "next":
+          this.pageNumber++;
+          this.pageDetails.from += this.pageDetails.perPage;
+          this.pageDetails.to += this.pageDetails.perPage;
+          if (this.pageDetails.to > this.totalPageData) {
+            this.pageDetails.to = this.totalPageData;
+          }
+          break;
+        case "previous":
+          this.pageNumber--;
+          this.pageDetails.from -= this.pageDetails.perPage;
+          this.pageDetails.to -= this.pageDetails.perPage;
+          break;
+        default:
+          this.pageNumber = 1;
+          break;
+      }
+
+      this.$store.dispatch("fetchList", {
+        item: "people",
+        pageNumber: this.pageNumber
+      });
     }
   },
   mounted() {
-    this.fetchList("people");
+    this.fetchList({ item: "people", pageNumber: this.pageNumber });
   },
-  computed: mapGetters(["people", "isLoading", "toast"])
+  computed: {
+    ...mapGetters(["people", "isLoading", "toast", "totalPageData"])
+  }
 };
 </script>
 <style lang=""></style>

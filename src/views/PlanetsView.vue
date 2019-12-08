@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class>
     <Header @emitting="getSearchTerm" />
     <main class="home-content">
       <div class="toast-wrapper">
@@ -23,10 +23,13 @@
       </section>
       <div class="pagination-wrapper">
         <div class="pagination-info">
-          {{ pageDetails.from }} - {{ pageDetails.to }} of
-          {{ pageDetails.totalData }}
+          {{ pageDetails.from }} - {{ pageDetails.to }} of {{ totalPageData }}
         </div>
-        <Pagination @changing="changePage" />
+        <Pagination
+          @changing="changePage"
+          :totalPages="getPageCount()"
+          :currentPage="pageNumber"
+        />
       </div>
     </main>
     <Footer />
@@ -38,7 +41,14 @@ export default {
   name: "home",
   data() {
     return {
-      searchItem: ""
+      searchItem: "",
+      pageNumber: 1,
+      totalPages: null,
+      pageDetails: {
+        to: 10,
+        from: 1,
+        perPage: 10
+      }
     };
   },
   props: {
@@ -66,18 +76,47 @@ export default {
       });
     },
 
+    getPageCount: function() {
+      const total = this.totalPageData;
+
+      const perPage = this.pageDetails.perPage;
+
+      return (this.totalPages = Math.ceil(total / perPage));
+    },
     getSearchTerm: function(searchValue) {
       this.searchItem = searchValue;
       this.makeSearchRequest();
     },
     changePage(value) {
-      this.$store.dispatch("changePage", { value: value, item: "planets" });
+      switch (value) {
+        case "next":
+          this.pageNumber++;
+          this.pageDetails.from += this.pageDetails.perPage;
+          this.pageDetails.to += this.pageDetails.perPage;
+          if (this.pageDetails.to > this.totalPageData) {
+            this.pageDetails.to = this.totalPageData;
+          }
+          break;
+        case "previous":
+          this.pageNumber--;
+          this.pageDetails.from -= this.pageDetails.perPage;
+          this.pageDetails.to -= this.pageDetails.perPage;
+          break;
+        default:
+          this.pageNumber = 1;
+          break;
+      }
+
+      this.$store.dispatch("fetchList", {
+        item: "people",
+        pageNumber: this.pageNumber
+      });
     }
   },
   mounted() {
-    this.fetchList("planets");
+    this.fetchList({ item: "planets", pageNumber: this.pageNumber });
   },
-  computed: mapGetters(["planets", "isLoading", "toast", "pageDetails"])
+  computed: mapGetters(["planets", "isLoading", "toast", "totalPageData"])
 };
 </script>
 <style lang=""></style>

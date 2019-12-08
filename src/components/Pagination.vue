@@ -1,12 +1,19 @@
 <template>
   <div class="pagination">
-    <div class="pagination-info"></div>
     <div class="pagination-buttons__wrapper">
-      <button class="paginate" @click="previousPage()">
+      <button
+        class="paginate"
+        :disabled="presentPage === 1"
+        @click="previousPage()"
+      >
         <font-awesome-icon :icon="['fas', 'angle-left']" size="2x" />
       </button>
 
-      <button class="paginate" @click="nextPage()">
+      <button
+        class="paginate"
+        :disabled="presentPage === totalPages"
+        @click="nextPage()"
+      >
         <font-awesome-icon :icon="['fas', 'angle-right']" size="2x" />
       </button>
     </div>
@@ -17,16 +24,23 @@ export default {
   data() {
     return {
       next: "next",
-      previous: "previous"
+      previous: "previous",
+      presentPage: 1
     };
   },
-  props: {},
+  props: ["totalPages", "currentPage"],
   methods: {
     nextPage() {
       this.$emit("changing", this.next);
     },
     previousPage() {
       this.$emit("changing", this.previous);
+    }
+  },
+  watch: {
+    currentPage: function(newVal) {
+      // watch for changes
+      return (this.presentPage = newVal);
     }
   }
 };
@@ -41,6 +55,9 @@ export default {
     padding: 0.5rem 1rem;
     cursor: pointer;
     color: #878790;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 }
 </style>

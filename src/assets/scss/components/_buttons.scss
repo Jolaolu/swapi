@@ -56,3 +56,13 @@
     color: $tertiary-color;
     font-weight: bold;
 }
+.pagination-wrapper{
+    display: flex;
+    justify-content: center;
+}
+.pagination-info{
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding-top: 2rem;
+    margin-right: 2rem;
+}
