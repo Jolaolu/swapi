@@ -51,5 +51,3 @@ export function reconstructObject(people) {
     return { ...person, id };
   });
 }
-
-export function paginationData

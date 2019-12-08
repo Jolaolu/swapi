@@ -81,6 +81,16 @@ export default {
 
       const perPage = this.pageDetails.perPage;
 
+      const totalItemsCount = total;
+      const numberOfItemsPerPage = perPage;
+      const page = this.pageNumber;
+      this.pageDetails.from =
+        page * numberOfItemsPerPage - (numberOfItemsPerPage - 1);
+      this.pageDetails.to = Math.min(
+        this.pageDetails.from + numberOfItemsPerPage - 1,
+        totalItemsCount
+      );
+
       return (this.totalPages = Math.ceil(total / perPage));
     },
     getSearchTerm: function(searchValue) {
@@ -91,16 +101,9 @@ export default {
       switch (value) {
         case "next":
           this.pageNumber++;
-          this.pageDetails.from += this.pageDetails.perPage;
-          this.pageDetails.to += this.pageDetails.perPage;
-          if (this.pageDetails.to > this.totalPageData) {
-            this.pageDetails.to = this.totalPageData;
-          }
           break;
         case "previous":
           this.pageNumber--;
-          this.pageDetails.from -= this.pageDetails.perPage;
-          this.pageDetails.to -= this.pageDetails.perPage;
           break;
         default:
           this.pageNumber = 1;
