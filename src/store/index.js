@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-// import createPersistedState from "vuex-persistedstate";
 import { spliceData, capitalizeItem, reconstructObject } from "@/utils/helpers";
 import http from "@/utils/service";
 
@@ -178,10 +177,10 @@ export default new Vuex.Store({
         dispatch("showToast", { message: message, context: "error" });
       }
     },
-    fetchList({ commit, dispatch, state }, item) {
+    fetchList ( { commit, dispatch }, { item, pageNumber }) {
       commit("Loading", true);
       http
-        .get(`${item}/?page=${state.currentPage}`)
+        .get(`${item}/?page=${pageNumber}`)
         .then(response => {
           const data = response.data.results;
 
@@ -239,17 +238,17 @@ export default new Vuex.Store({
           dispatch("showToast", { message: message, context: "error" });
         });
     },
-    changePage({ commit, dispatch, state }, { value, item }) {
+    changePage({ commit, dispatch }, { value, item }) {
       switch (value) {
         case "next":
           commit("currentPage", 1);
           commit("setFromTo", {
-            from: state.pageDetails.from + 10 - 1,
-            to: state.pageDetails.to + 10
+            from: ,
+            to:
           });
 
           dispatch("fetchList", item);
-          if (state.currentPage > state.pageDetails.totalPages) {
+          if (currentPage > totalPages) {
             commit("currentPage", -1);
 
             dispatch("showToast", {
@@ -261,13 +260,13 @@ export default new Vuex.Store({
         case "previous":
           commit("currentPage", -1);
           commit("setFromTo", {
-            from: state.pageDetails.from - 10 + 1,
-            to: state.pageDetails.to - 10
+            from:  - 10 + 1,
+            to:  - 10
           });
 
           dispatch("fetchList", item);
 
-          if (state.currentPage < 1) {
+          if (currentPage < 1) {
             commit("currentPage", 1);
 
             dispatch("showToast", {
@@ -282,9 +281,4 @@ export default new Vuex.Store({
       }
     }
   }
-  // plugins: [
-  //   createPersistedState({
-  //     storage: window.sessionStorage
-  //   })
-  // ]
 });
