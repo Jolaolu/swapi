@@ -9,7 +9,12 @@
         </router-link>
       </div>
       <div class="o4-starship-container">
-        <img :src="require('@/assets/images/starship.jpg')" class="o4-starship" alt srcset />
+        <img
+          :src="require('@/assets/images/starship.jpg')"
+          class="o4-starship"
+          alt
+          srcset
+        />
       </div>
     </div>
   </transition>
@@ -78,11 +83,11 @@ button {
     margin: 4rem 0;
     font-size: 2rem;
     width: 80%;
-    text-align: center
+    text-align: center;
   }
-   button {
-      padding:1rem 3rem;
-      border-radius: 5rem;
-    }
+  button {
+    padding: 1rem 3rem;
+    border-radius: 5rem;
+  }
 }
 </style>
