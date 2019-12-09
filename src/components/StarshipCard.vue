@@ -2,8 +2,8 @@
   <div class="starshipcard-wrapper">
     <article
       class="starshipcard"
-      v-for="(starship, index) in starships"
-      :key="index"
+      v-for="starship in starships"
+      :key="starship.id"
     >
       <div class="starshipcard-image__wrapper">
         <img class="starship-image" :src="getRandomImage()" alt srcset />

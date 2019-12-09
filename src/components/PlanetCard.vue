@@ -1,15 +1,15 @@
 <template>
   <div class="planetcard-wrapper">
-    <article class="planetcard" v-for="(planet, index) in planets" :key="index">
-      <router-link
-        :to="{ name: 'Planet', params: { id: planet.id, planet: planet } }"
-      >
-        <div class="planetcard-image__wrapper">
-          <img :src="getRandomImage()" alt srcset />
-        </div>
-        <div class="planetcard-title">{{ planet.name }}</div>
-      </router-link>
-    </article>
+      <article class="planetcard" v-for="planet in planets" :key="planet.id">
+        <router-link
+          :to="{ name: 'Planet', params: { id: planet.id, planet: planet } }"
+        >
+          <div class="planetcard-image__wrapper">
+            <img :src="getRandomImage()" alt srcset />
+          </div>
+          <div class="planetcard-title">{{ planet.name }}</div>
+        </router-link>
+      </article>
   </div>
 </template>
 

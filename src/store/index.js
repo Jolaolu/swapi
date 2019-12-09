@@ -94,6 +94,7 @@ export default new Vuex.Store({
         })
         .catch(response => {
           const message = response;
+          this.$router.push("/404");
           dispatch("showToast", { message: message, context: "error" });
         });
     },
@@ -179,6 +180,7 @@ export default new Vuex.Store({
         })
         .catch(response => {
           const message = response;
+          this.$router.push("/404");
           dispatch("showToast", { message: message, context: "error" });
         });
     },

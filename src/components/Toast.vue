@@ -1,5 +1,5 @@
 <template>
-  <transition name="toast-slide">
+  <transition name="toast">
     <div :class="['toast', context]">{{ message }}</div>
   </transition>
 </template>
@@ -29,13 +29,13 @@ export default {
     background-color: #51d88a;
   }
 }
-.toast-slide-enter,
-.toast-slide-leave-to {
+.toast-enter,
+.toast-leave-to {
   opacity: 0;
   transform: translateY(-100px);
 }
-.toast-slide-enter-active,
-.toast-slide-leave-active {
+.toast-enter-active,
+.toast-leave-active {
   transition: all 0.6s;
 }
 </style>
