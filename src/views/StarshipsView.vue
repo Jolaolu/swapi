@@ -3,11 +3,7 @@
     <Header @emitting="getSearchTerm" />
     <main class="home-content">
       <div class="toast-wrapper">
-        <Toast
-          :message="toast.message"
-          :context="toast.context"
-          v-if="toast.show"
-        />
+        <Toast :message="toast.message" :context="toast.context" v-if="toast.show" />
       </div>
       <section class="starships-list">
         <div class="home-content__title-wrapper">
@@ -22,14 +18,10 @@
         </div>
       </section>
       <div class="pagination-wrapper">
-        <div class="pagination-info">
-          {{ pageDetails.from }} - {{ pageDetails.to }} of {{ totalPageData }}
-        </div>
-        <Pagination
-          @changing="changePage"
-          :totalPages="getPageCount()"
-          :currentPage="pageNumber"
-        />
+        <div
+          class="pagination-info"
+        >{{ pageDetails.from }} - {{ pageDetails.to }} of {{ totalPageData }}</div>
+        <Pagination @changing="changePage" :totalPages="getPageCount()" :currentPage="pageNumber" />
       </div>
     </main>
     <Footer />

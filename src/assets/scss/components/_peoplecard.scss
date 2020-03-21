@@ -19,6 +19,7 @@
     .person-image{
         width: 100%;
         height: 389px;
+        object-fit: cover;
     }
     .peoplecard-details{
         background-color:  $primary-color;
